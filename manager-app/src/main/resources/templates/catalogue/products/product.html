@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>&ndash;[[${product.title}]]&ndash;</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<a data-th-href="@{/catalogue/products/list}"> Exit </a>
+<h1 data-th-text="${product.title}"></h1>
+
+<label>Details
+    <a data-th-text="${product.details}"></a>
+    <br>
+</label>
+<label>Price
+    <a data-th-text="${product.price}"></a>
+    <br>
+</label>
+<label>Quantity
+    <a data-th-text="${product.quantity}"></a>
+    <br>
+</label>
+<a data-th-href="@{/catalogue/products/{productId}(productId=${product.id})/edit}"> Edit ?</a>
+
+</body>
+</html>
