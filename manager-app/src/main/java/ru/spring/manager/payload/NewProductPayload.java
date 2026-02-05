@@ -1,4 +1,21 @@
 package ru.spring.manager.payload;
 
-public record NewProductPayload(String title, String details, Integer price, Integer quantity) {
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public record NewProductPayload(
+
+        @NotNull
+        @Size(min = 3, max = 100)
+        String title,
+
+        @Size(max = 1000)
+        String details,
+
+        @NotNull
+        Integer price,
+
+        @NotNull
+        Integer quantity) {
 }

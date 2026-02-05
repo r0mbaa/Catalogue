@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.spring.manager.entity.Product;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 @Repository
 public class InMemoryProductRepositoryImpl implements ProductRepository {
@@ -31,5 +30,10 @@ public class InMemoryProductRepositoryImpl implements ProductRepository {
         return this.products.stream()
                 .filter(product -> Objects.equals(productId, product.getId()))
                 .findFirst();
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        this.products.removeIf(product -> Objects.equals(product.getId(), id));
     }
 }

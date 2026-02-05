@@ -7,7 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="manager-app (1)" />
       </profile>
       <profile name="Annotation profile for catalogue" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -19,6 +18,10 @@
         <module name="manager-app" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="catalogue (1)" target="21" />
+      <module name="manager-app (1)" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

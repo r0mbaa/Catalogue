@@ -40,7 +40,12 @@ public class DefaultProductServiceImpl implements ProductService {
                     product.setPrice(price);
                     product.setQuantity(quantity);
                 }, () -> {
-                    throw new NoSuchElementException();
+                    throw new NoSuchElementException(id.toString());
                 });
+    }
+
+    @Override
+    public void deleteProduct(Integer id) {
+        this.productRepository.deleteById(id);
     }
 }

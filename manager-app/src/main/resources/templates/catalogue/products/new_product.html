@@ -8,23 +8,29 @@
 <body>
 <a data-th-href="@{list}"> Exit to list</a>
 <h1>New product create</h1>
+<div data-th-if="${errors}">
+  <h2>You have a mistakes</h2>
+  <ul>
+    <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
+  </ul>
+</div>
 <form method="post" data-th-action="@{create}">
   <label>Title
 
-    <input type="text" name="title"><br>
+    <input type="text" name="title" data-th-value="${payload?.title()}"><br>
 
   </label>
   <label>Details
 
-    <input type="text" name="details"><br>
+    <input type="text" name="details" data-th-value="${payload?.details()}"><br>
   </label>
   <label>Price
 
-    <input type="text" name="price"><br>
+    <input type="text" name="price" data-th-value="${payload?.price()}"><br>
   </label>
   <label>Quantity
 
-    <input type="text" name="quantity"><br>
+    <input type="text" name="quantity" data-th-value="${payload?.quantity()}"><br>
   </label>
   <button type="submit">Create!</button>
 

@@ -1,8 +1,11 @@
 package ru.spring.manager.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import ru.spring.manager.entity.Product;
 import ru.spring.manager.payload.NewProductPayload;
@@ -27,8 +30,19 @@ public class ProductsController {
     }
 
     @PostMapping("create")
-    public String createProduct(NewProductPayload payload){
-        Product createdProduct = this.productService.createProduct(payload.title(), payload.details(), payload.price(), payload.quantity());
-        return  "redirect:/catalogue/products/%d".formatted(createdProduct.getId());
+    public String createProduct(@Valid NewProductPayload payload, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()){
+            model.addAttribute("payload", payload);
+            model.addAttribute("errors", bindingResult.getAllErrors().stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .toList()
+            );
+            return "catalogue/products/new_product";
+        }else
+        {
+            Product createdProduct = this.productService.createProduct(payload.title(), payload.details(), payload.price(), payload.quantity());
+            return  "redirect:/catalogue/products/%d".formatted(createdProduct.getId());
+        }
+
     }
 }

@@ -9,22 +9,28 @@
 <a data-th-href="@{/catalogue/products/list}"> Exit to list </a>
 <a data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}"> Cancel </a>
 <h1>Edit product [[${product.title}]]</h1>
+<div data-th-if="${errors}">
+  <h2>You have a mistakes</h2>
+  <ul>
+    <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
+  </ul>
+</div>
 <form method="post" data-th-action="@{/catalogue/products/{productId}/edit(productId=${product.id})}">
   <label>Title
 
-    <input type="text" name="title" data-th-value="${product.title}"><br>
+    <input type="text" name="title" data-th-value="${payload != null ? payload.title : product.title}"><br>
 
   </label>
   <label>Details
 
-    <input type="text" name="details" data-th-value="${product.details}"><br>
+    <input type="text" name="details" data-th-value="${payload != null ? payload.details() : product.details}"><br>
   </label>
   <label>Price
-    <input type="text" name="price" data-th-value="${product.price}"><br>
+    <input type="text" name="price" data-th-value="${payload != null ? payload.price() : product.price}"><br>
   </label>
   <label>Quantity
 
-    <input type="text" name="quantity" data-th-value="${product.quantity}"><br>
+    <input type="text" name="quantity" data-th-value="${payload != null ? payload.quantity() : product.quantity}"><br>
   </label>
   <button type="submit">Edit!</button>
 
